@@ -20,6 +20,8 @@ This project uses two datasets:
 - `cab_rides.csv` for trip-level cab ride information.
 - `weather.csv` for time-based weather observations.
 
+Before starting the experiment, create directory `data` and download those two files from [Kaggle](https://www.kaggle.com/datasets/ravi72munde/uber-lyft-cab-prices/data?select=cab_rides.csv) into the same directory .
+
 The goal is to predict the ride `price` using trip metadata, time information, and matched weather features.
 
 ## Workflow
@@ -182,7 +184,7 @@ The notebook includes residual scatter plots for model predictions:
 Install the required Python packages before running the notebook:
 
 ```bash
-pip install pandas numpy scikit-learn xgboost torch matplotlib
+pip install -r requirements.txt
 ```
 
 ## How to Run
