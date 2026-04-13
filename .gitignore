@@ -1,3 +1,6 @@
+data/
+train_test_split.npz
+
 .vscode/
 *.csv
 *.parquet

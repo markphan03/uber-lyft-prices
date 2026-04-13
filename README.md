@@ -2,15 +2,34 @@
 
 A machine learning project that predicts Uber and Lyft ride prices by combining cab trip data with weather conditions. The notebook builds a full preprocessing and training pipeline, then compares three approaches: a baseline Linear Regression model, an XGBoost Random Forest regressor, and a PyTorch neural network.
 
+
+## Quickstart:
+
+Run these following commands:
+
+```bash
+chmod +x run_project.sh
+./run_project.sh
+```
+
+These commands includes creating virtual environment, installing dependancies, and running code for the entire project.
+
+
 ## Project Structure
 
 ```bash
-.
 ├── data/
 │   ├── cab_rides.csv
 │   └── weather.csv
+├── preprocess_data.py
+├── nn_model.py
+├── nn_training.py
+├── prediction.py
 ├── prediction.ipynb
-└── cab_price_checkpoint.pth
+├── train_test_split.npz
+├── nn_checkpoint.pth
+├── requirements.txt
+└── README.md
 ```
 
 ## Overview
@@ -23,6 +42,50 @@ This project uses two datasets:
 Before starting the experiment, create directory `data` and download those two files from [Kaggle](https://www.kaggle.com/datasets/ravi72munde/uber-lyft-cab-prices/data?select=cab_rides.csv) into the same directory .
 
 The goal is to predict the ride `price` using trip metadata, time information, and matched weather features.
+
+## File Description
+
+- `data/cab_rides.csv` — Raw ride-share trip data used for model development. 
+- `data/weather.csv` — Weather data merged with trip records during preprocessing. 
+- `preprocess_data.py` — Script for cleaning, merging, encoding, scaling, and preparing the dataset. 
+- `nn_model.py` — Definition of the neural network architecture used for cab price prediction. 
+- `nn_training.py` — Training script for fitting the neural network and saving the model checkpoint. 
+- `prediction.py` — Script for loading the trained model and generating predictions. 
+- `prediction.ipynb` — Notebook for interactive inference, testing, and experimentation. 
+- `train_test_split.npz` — Saved train/test arrays for reproducible experiments. 
+- `cab_price_checkpoint.pth` — Trained PyTorch model checkpoint. 
+- `requirements.txt` — Python dependencies required to run the project. 
+- `README.md` — Project documentation and usage instructions. 
+
+
+
+## How to Run
+
+1. Put the datasets inside a `data/` directory:
+   - `data/cab_rides.csv`
+   - `data/weather.csv`
+
+2. Open the notebook:
+
+```bash
+jupyter notebook prediction.ipynb
+```
+
+3. Run the cells in order.
+
+4. If a compatible GPU is available, XGBoost and PyTorch can use CUDA acceleration.
+
+## Results
+
+The model comparison shows:
+
+| Model | RMSE | MAE | R² |
+|------|------|------|------|------|
+| Linear Regression | 2.5033 ± 0.0344 | 1.7572 ± 0.0122 | 0.9273 ± 0.0016 |
+| XGBoost Random Forest | 1.8834 ± 0.0323 | 1.2576 ± 0.0096 | 0.9589 ± 0.0014 |
+| PyTorch Neural Network | 1.7131 ± 0.0323 | 1.1287 ± 0.0087 | 0.9660 ± 0.0013 |
+
+The neural network performs best on the test set, with the lowest error and highest R² among the three models.
 
 ## Workflow
 
@@ -104,11 +167,9 @@ The following columns are removed before modeling:
 A simple baseline regression model is trained using scikit-learn.
 
 #### Metrics
-- RMSE: 1.582263735438464
-- R²: 0.9273204032424077
-- MAE: 1.7573268089378415
-- MAPE: 0.13276146653897686
-- RMSLE: 0.4167508184553223
+- RMSE: 2.5033 ± 0.0344
+- R2: 0.9273 ± 0.0016
+- MAE: 1.7572 ± 0.0122
 
 ### XGBoost Random Forest
 
@@ -122,11 +183,9 @@ The second model uses `XGBRFRegressor` from XGBoost.
 - `tree_method="hist"`
 
 #### Metrics
-- RMSE: 1.3724851367670727
-- R²: 0.9588540009861682
-- MAE: 1.2575923925912122
-- MAPE: 0.09456407133287384
-- RMSLE: 0.3526263758168607
+- RMSE: 1.8834 ± 0.0323
+- R2: 0.9589 ± 0.0014
+- MAE: 1.2576 ± 0.0096
 
 ### PyTorch Neural Network
 
@@ -159,17 +218,16 @@ Input
 The neural network training saves checkpoints to:
 
 ```bash
-cab_price_checkpoint.pth
+nn_checkpoint.pth
 ```
 
 If the checkpoint file already exists, training resumes from the saved state.
 
 #### Neural network metrics
-- RMSE: 1.3094271610768238
-- R²: 0.9659103751182556
-- MAE: 1.1297942
-- MAPE: 8.318319
-- RMSLE: 0.3352860855051085
+- RMSE: 1.7131 ± 0.0323
+- R2: 0.9660 ± 0.0013
+- MAE: 1.1287 ± 0.0087
+
 
 ## Visualization
 
@@ -179,41 +237,6 @@ The notebook includes residual scatter plots for model predictions:
 - Horizontal reference line at zero
 - Used to inspect model error distribution visually
 
-## Requirements
-
-Install the required Python packages before running the notebook:
-
-```bash
-pip install -r requirements.txt
-```
-
-## How to Run
-
-1. Put the datasets inside a `data/` directory:
-   - `data/cab_rides.csv`
-   - `data/weather.csv`
-
-2. Open the notebook:
-
-```bash
-jupyter notebook prediction.ipynb
-```
-
-3. Run the cells in order.
-
-4. If a compatible GPU is available, XGBoost and PyTorch can use CUDA acceleration.
-
-## Results
-
-The model comparison shows:
-
-| Model | RMSE | R² | MAE | RMSLE |
-|------|------|------|------|------|
-| Linear Regression | 1.5823 | 0.9273 | 1.7573 | 0.4168 |
-| XGBoost Random Forest | 1.3725 | 0.9589 | 1.2576 | 0.3526 |
-| PyTorch Neural Network | 1.3094 | 0.9659 | 1.1298 | 0.3353 |
-
-The neural network performs best on the test set, with the lowest error and highest R² among the three models.
 
 ## Notes
 
