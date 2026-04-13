@@ -3,9 +3,23 @@
 A machine learning project that predicts Uber and Lyft ride prices by combining cab trip data with weather conditions. The notebook builds a full preprocessing and training pipeline, then compares three approaches: a baseline Linear Regression model, an XGBoost Random Forest regressor, and a PyTorch neural network.
 
 
+## Overview
+
+This project uses two datasets:
+
+- `cab_rides.csv` for trip-level cab ride information.
+- `weather.csv` for time-based weather observations.
+
+The goal is to predict the ride `price` using trip metadata, time information, and matched weather features.
+
+
 ## Quickstart:
 
-Run these following commands:
+1. Create a directory `data`
+
+2. Download `cab_rides.csv` and `weather.csv` from [Kaggle](https://www.kaggle.com/datasets/ravi72munde/uber-lyft-cab-prices/data?select=cab_rides.csv) into the same directory 
+
+3. Run these following commands:
 
 ```bash
 chmod +x run_project.sh
@@ -32,16 +46,7 @@ These commands includes creating virtual environment, installing dependancies, a
 └── README.md
 ```
 
-## Overview
 
-This project uses two datasets:
-
-- `cab_rides.csv` for trip-level cab ride information.
-- `weather.csv` for time-based weather observations.
-
-Before starting the experiment, create directory `data` and download those two files from [Kaggle](https://www.kaggle.com/datasets/ravi72munde/uber-lyft-cab-prices/data?select=cab_rides.csv) into the same directory .
-
-The goal is to predict the ride `price` using trip metadata, time information, and matched weather features.
 
 ## File Description
 
