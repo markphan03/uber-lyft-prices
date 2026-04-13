@@ -85,7 +85,7 @@ jupyter notebook prediction.ipynb
 The model comparison shows:
 
 | Model | RMSE | MAE | R² |
-|------|------|------|------|------|
+|------|------|------|------|
 | Linear Regression | 2.5033 ± 0.0344 | 1.7572 ± 0.0122 | 0.9273 ± 0.0016 |
 | XGBoost Random Forest | 1.8834 ± 0.0323 | 1.2576 ± 0.0096 | 0.9589 ± 0.0014 |
 | PyTorch Neural Network | 1.7131 ± 0.0323 | 1.1287 ± 0.0087 | 0.9660 ± 0.0013 |
